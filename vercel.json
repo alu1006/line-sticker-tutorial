@@ -1,4 +1,18 @@
 {
   "cleanUrls": false,
-  "trailingSlash": true
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/tutorial/line-sticker",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/tutorial/line-sticker/site",
+      "destination": "/site/index.html"
+    },
+    {
+      "source": "/tutorial/line-sticker/:path*",
+      "destination": "/:path*"
+    }
+  ]
 }

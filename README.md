@@ -3,7 +3,7 @@
 這是一套兩小時的學生實作課程。學生先把手繪角色轉成九宮格 LINE 貼圖，再用貼圖輔助呈現自己的專題，完成只有兩個 Section 的一頁式網站。
 
 - 第一小時：[九宮格貼圖課堂](https://codinglu.tw/tutorial/line-sticker)
-- 第二小時：[GPT 專題網站上架課](https://codinglu.tw/tutorial/line-sticker/site/)
+- 第二小時：[GPT 專題網站上架課](https://codinglu.tw/tutorial/line-sticker/site)
 - LINE Creators Market：[creator.line.me](https://creator.line.me/zh-hant/)
 
 ## 課程目標
@@ -88,13 +88,13 @@
 ## 本機執行
 
 ```bash
-python3 -m http.server 8790
+vercel dev --listen 8790
 ```
 
 研習頁面為：
 
-- `http://localhost:8790/`
-- `http://localhost:8790/site/`
+- `http://localhost:8790/tutorial/line-sticker`
+- `http://localhost:8790/tutorial/line-sticker/site`
 
 ## 專案結構
 
@@ -110,4 +110,4 @@ vercel.json            # Vercel 靜態網站設定
 GitHub 更新後，可使用 Vercel 專案自動部署；學生的單頁成果則可直接使用 Vercel Drop。正式課程入口為：
 
 - `https://codinglu.tw/tutorial/line-sticker`
-- `https://codinglu.tw/tutorial/line-sticker/site/`
+- `https://codinglu.tw/tutorial/line-sticker/site`
