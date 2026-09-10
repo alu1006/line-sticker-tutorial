@@ -163,9 +163,20 @@ input[type="checkbox"] { width: 19px; height: 19px; accent-color: var(--red); }
 }
 .upload-stage input, .grid-upload input { position: absolute; width: 1px; height: 1px; opacity: 0; }
 .upload-stage img { display: none; width: 100%; max-height: 480px; object-fit: contain; }
+.upload-stage img.sample-visible { display: block; }
 .upload-stage > span, .grid-upload > span { display: grid; gap: 10px; place-items: center; padding: 30px; text-align: center; font-size: 1.05rem; font-weight: 900; }
+.upload-stage > .example-replace { position: absolute; right: 12px; bottom: 12px; gap: 2px; padding: 10px 13px; border: 2px solid var(--ink); background: white; box-shadow: 4px 4px 0 var(--ink); }
+.upload-stage > .example-replace b { font-size: 1rem; }
 .upload-stage b, .grid-upload b { font-size: 3rem; }
 .upload-stage small, .grid-upload small { font-weight: 400; }
+
+.example-board { display: grid; grid-template-columns: minmax(0, 1fr) 310px; margin: 0 0 26px; overflow: hidden; border: var(--line); background: white; box-shadow: var(--shadow); }
+.example-board img { display: block; width: 100%; max-height: 470px; object-fit: contain; }
+.example-board figcaption { display: grid; align-content: end; gap: 8px; padding: 22px; border-left: var(--line); line-height: 1.5; }
+.example-board figcaption strong { font-size: 1.1rem; }
+.grid-example { grid-template-columns: minmax(280px, 520px) 1fr; color: var(--ink); }
+.grid-example img { max-height: 520px; }
+.replace-grid { cursor: pointer; }
 
 .prompt-workspace { display: grid; grid-template-columns: minmax(260px, .68fr) minmax(360px, 1.32fr); gap: 26px; }
 .field-stack { display: grid; align-content: start; gap: 18px; }
@@ -269,6 +280,8 @@ textarea { resize: vertical; }
   .intro-band { grid-template-columns: 1fr; min-height: auto; }
   .lesson-section { grid-template-columns: 72px 1fr; }
   .two-columns, .prompt-workspace, .cutter-layout { grid-template-columns: 1fr; }
+  .example-board, .grid-example { grid-template-columns: 1fr; }
+  .example-board figcaption { border-top: var(--line); border-left: 0; }
   .section-heading { align-items: start; flex-direction: column; gap: 6px; }
   .action-editor, .sticker-results { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .asset-picks { grid-template-columns: 1fr; }
@@ -296,6 +309,7 @@ textarea { resize: vertical; }
   .asset-picks article { grid-template-columns: 1fr; }
   .asset-picks canvas { grid-row: auto; grid-column: auto; width: 100%; max-width: 190px; }
   .grid-upload { min-height: 320px; }
+  .example-board img, .grid-example img { max-height: 360px; }
   .download-bar { align-items: stretch; flex-direction: column; }
   .button { width: 100%; }
 }

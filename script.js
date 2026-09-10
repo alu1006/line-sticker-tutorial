@@ -125,6 +125,15 @@ function loadImageFile(file) {
   });
 }
 
+function loadImageUrl(src) {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    image.onload = () => resolve(image);
+    image.onerror = reject;
+    image.src = src;
+  });
+}
+
 $("#drawingInput").addEventListener("change", async (event) => {
   const file = event.target.files[0];
   if (!file) return;
@@ -158,6 +167,17 @@ $("#gridInput").addEventListener("change", async (event) => {
     toast("無法讀取這張圖片，請改用 PNG 或 JPG");
   }
 });
+
+async function loadExampleGrid() {
+  state.gridImage = await loadImageUrl("/tutorial/line-sticker/assets/example-grid.png");
+  resetGridLines();
+  drawGridPreview();
+  gridCanvas.style.display = "block";
+  $("#gridEmpty").style.display = "none";
+  $("#gridGuide").hidden = false;
+  $("#processGrid").disabled = false;
+  $("#resetGridLines").disabled = false;
+}
 
 function drawGridPreview() {
   if (!state.gridImage) return;
@@ -628,3 +648,4 @@ $("#downloadZip").addEventListener("click", async () => {
 });
 
 updatePrompts();
+loadExampleGrid().catch(() => toast("範例九宮格載入失敗，請改為上傳圖片"));

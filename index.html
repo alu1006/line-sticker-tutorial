@@ -55,8 +55,8 @@
           </div>
           <label class="upload-stage" for="drawingInput">
             <input id="drawingInput" type="file" accept="image/png,image/jpeg,image/webp" />
-            <img id="drawingPreview" alt="學生的手繪角色預覽" />
-            <span id="drawingEmpty"><b>＋</b>拍照或選擇手繪角色<small>PNG、JPG 或 WEBP</small></span>
+            <img id="drawingPreview" class="sample-visible" src="/tutorial/line-sticker/assets/example-sketch.png" alt="嘉義砂鍋魚角色手繪草圖範例" />
+            <span id="drawingEmpty" class="example-replace"><b>＋</b>目前為範例<small>點擊可換成自己的草圖</small></span>
           </label>
         </div>
       </section>
@@ -72,6 +72,11 @@
             <p>網站不呼叫 API。按下按鈕後，提示詞會複製到剪貼簿並開啟 ChatGPT。</p>
           </div>
 
+          <figure class="example-board turnaround-example">
+            <img src="/tutorial/line-sticker/assets/example-turnaround.png" alt="嘉義砂鍋魚角色正面、側面與背面三視圖範例" />
+            <figcaption><strong>範例成果｜角色三視圖</strong><span>學生尚未生成時，先用範例理解正面、側面與背面要保持一致。</span></figcaption>
+          </figure>
+
           <div class="prompt-workspace">
             <div class="field-stack">
               <label>重要外觀（可留空）
@@ -84,7 +89,7 @@
                   <option value="整理成兒童繪本角色設定圖，保留原始角色比例與筆觸">兒童繪本感</option>
                 </select>
               </label>
-              <div class="upload-reminder" id="drawingReminder">尚未選擇手繪圖。前往 ChatGPT 後仍需手動上傳圖片。</div>
+              <div class="upload-reminder ready" id="drawingReminder">目前使用手繪草圖範例。前往 ChatGPT 後可上傳範例，或換成自己的圖片。</div>
             </div>
             <label class="prompt-output">角色三視圖提示詞
               <textarea id="characterPrompt" rows="16"></textarea>
@@ -110,6 +115,11 @@
             </div>
             <p>把完成的角色三視圖上傳到同一個 ChatGPT 對話，再送出這段提示詞。</p>
           </div>
+
+          <figure class="example-board grid-example">
+            <img src="/tutorial/line-sticker/assets/example-grid.png" alt="嘉義砂鍋魚角色九宮格動作範例" />
+            <figcaption><strong>範例成果｜九宮格動作</strong><span>下一步已自動載入這張範例，可直接練習調整格線與切圖。</span></figcaption>
+          </figure>
 
           <div class="action-editor" id="actionEditor" aria-label="九宮格動作設定"></div>
 
@@ -153,6 +163,7 @@
                 <input id="toleranceRange" type="range" min="0" max="100" value="38" step="1" />
               </label>
               <label class="toggle-row"><input id="removeBackground" type="checkbox" checked /> 去除格子邊緣相連的純色背景</label>
+              <label class="button white full replace-grid" for="gridInput">更換九宮格圖片</label>
               <button class="button white full" id="resetGridLines" type="button" disabled>重設為平均九宮格</button>
               <div class="spec-block">
                 <strong>輸出規格</strong>
