@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="一小時完成 AI 九宮格角色與八張 LINE 貼圖的課堂工具" />
+    <title>九宮格貼圖課堂</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="market-banner" href="https://creator.line.me/zh-hant/" target="_blank" rel="noreferrer">
+      <span class="market-label">LINE CREATORS MARKET</span>
+      <strong>用 LINE 貼圖推廣你的專題</strong>
+      <span class="market-action">前往原創市集 ↗</span>
+    </a>
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="回到課程頂端">
+        <span class="brand-shape" aria-hidden="true"></span>
+        九宮格貼圖課堂
+      </a>
+      <a class="next-course-link" href="site/">研習第 2 頁（共 2 頁）：作品網站上架 →</a>
+      <div class="class-clock" aria-label="建議課程時間 60 分鐘">
+        <span id="clockValue">60</span>
+        <small>分鐘課程</small>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="intro-band">
+        <div>
+          <p class="kicker">AI CHARACTER WORKSHOP</p>
+          <h1>畫一個角色，<br />完成八張貼圖。</h1>
+          <p class="lead">提示詞在這裡準備，圖片交給 ChatGPT 生成，切圖則留在瀏覽器完成。</p>
+        </div>
+        <div class="route-map" aria-label="課程流程">
+          <button class="route active" type="button" data-jump="draw"><b>01</b><span>畫角色</span><small>10 分</small></button>
+          <button class="route" type="button" data-jump="character"><b>02</b><span>角色設定</span><small>15 分</small></button>
+          <button class="route" type="button" data-jump="grid"><b>03</b><span>九宮格</span><small>15 分</small></button>
+          <button class="route" type="button" data-jump="cut"><b>04</b><span>切成貼圖</span><small>20 分</small></button>
+        </div>
+      </section>
+
+      <section class="lesson-section yellow" id="draw" data-step="draw">
+        <div class="section-label"><span>01</span><p>0–10 MIN</p></div>
+        <div class="section-content two-columns">
+          <div>
+            <p class="kicker">DRAW</p>
+            <h2>先讓角色被認得出來</h2>
+            <p class="section-note">用深色筆畫完整角色。五官、服裝與重要道具要清楚，不必追求完美。</p>
+            <div class="check-row">
+              <label><input type="checkbox" /> 完整輪廓</label>
+              <label><input type="checkbox" /> 清楚五官</label>
+              <label><input type="checkbox" /> 代表性道具</label>
+            </div>
+          </div>
+          <label class="upload-stage" for="drawingInput">
+            <input id="drawingInput" type="file" accept="image/png,image/jpeg,image/webp" />
+            <img id="drawingPreview" alt="學生的手繪角色預覽" />
+            <span id="drawingEmpty"><b>＋</b>拍照或選擇手繪角色<small>PNG、JPG 或 WEBP</small></span>
+          </label>
+        </div>
+      </section>
+
+      <section class="lesson-section paper" id="character" data-step="character">
+        <div class="section-label"><span>02</span><p>10–25 MIN</p></div>
+        <div class="section-content">
+          <div class="section-heading">
+            <div>
+              <p class="kicker">CHARACTER PROMPT</p>
+              <h2>固定角色長相</h2>
+            </div>
+            <p>網站不呼叫 API。按下按鈕後，提示詞會複製到剪貼簿並開啟 ChatGPT。</p>
+          </div>
+
+          <div class="prompt-workspace">
+            <div class="field-stack">
+              <label>重要外觀（可留空）
+                <textarea id="characterFeatures" rows="4" placeholder="例如：黃色雨衣、左手拿紅色手電筒"></textarea>
+              </label>
+              <label>整理方式
+                <select id="characterStyle">
+                  <option value="保留原始筆觸與手繪感，線條清楚，使用乾淨柔和的配色">保留手繪感</option>
+                  <option value="使用簡潔線條與平面色塊，但仍保留原始草圖的辨識特徵">簡潔色塊</option>
+                  <option value="整理成兒童繪本角色設定圖，保留原始角色比例與筆觸">兒童繪本感</option>
+                </select>
+              </label>
+              <div class="upload-reminder" id="drawingReminder">尚未選擇手繪圖。前往 ChatGPT 後仍需手動上傳圖片。</div>
+            </div>
+            <label class="prompt-output">角色三視圖提示詞
+              <textarea id="characterPrompt" rows="16"></textarea>
+            </label>
+          </div>
+
+          <div class="action-row">
+            <button class="button red" id="refreshCharacterPrompt" type="button">更新提示詞</button>
+            <button class="button white" data-copy="characterPrompt" type="button">複製提示詞</button>
+            <button class="button blue open-chatgpt" data-prompt="characterPrompt" type="button">複製並開啟 ChatGPT ↗</button>
+          </div>
+          <p class="status-line" id="characterStatus" aria-live="polite">到 ChatGPT 後，上傳剛才的手繪圖，再貼上提示詞。</p>
+        </div>
+      </section>
+
+      <section class="lesson-section blue" id="grid" data-step="grid">
+        <div class="section-label"><span>03</span><p>25–40 MIN</p></div>
+        <div class="section-content">
+          <div class="section-heading light">
+            <div>
+              <p class="kicker">3 × 3 GRID</p>
+              <h2>一次生成九個動作</h2>
+            </div>
+            <p>把完成的角色三視圖上傳到同一個 ChatGPT 對話，再送出這段提示詞。</p>
+          </div>
+
+          <div class="action-editor" id="actionEditor" aria-label="九宮格動作設定"></div>
+
+          <label class="prompt-output dark-output">九宮格提示詞
+            <textarea id="gridPrompt" rows="18"></textarea>
+          </label>
+          <div class="action-row">
+            <button class="button yellow-button" id="refreshGridPrompt" type="button">更新提示詞</button>
+            <button class="button white" data-copy="gridPrompt" type="button">複製提示詞</button>
+            <button class="button black open-chatgpt" data-prompt="gridPrompt" type="button">複製並開啟 ChatGPT ↗</button>
+          </div>
+          <p class="status-line light-text" id="gridStatus" aria-live="polite">完成後下載九宮格 PNG，再到下一步上傳。</p>
+        </div>
+      </section>
+
+      <section class="lesson-section paper" id="cut" data-step="cut">
+        <div class="section-label"><span>04</span><p>40–60 MIN</p></div>
+        <div class="section-content">
+          <div class="section-heading">
+            <div>
+              <p class="kicker">CUT & EXPORT</p>
+              <h2>切割、去背、符合 LINE 大小</h2>
+            </div>
+            <p>所有處理都在這台電腦的瀏覽器完成，不會上傳圖片。</p>
+          </div>
+
+          <div class="cutter-layout">
+            <div>
+              <label class="grid-upload" for="gridInput">
+                <input id="gridInput" type="file" accept="image/png,image/jpeg,image/webp" />
+                <canvas id="gridCanvas" width="720" height="720" aria-label="可拖曳格線的九宮格切割預覽"></canvas>
+                <span id="gridEmpty"><b>＋</b>上傳 ChatGPT 生成的九宮格<small>畫面會自動標出 3 × 3 切割線</small></span>
+              </label>
+              <p class="grid-guide" id="gridGuide" hidden>拖曳紅色實線調整切割位置；黃色虛線是格內縮後的實際裁切範圍。</p>
+            </div>
+            <div class="cut-controls">
+              <label>格內縮 <output id="insetValue">2%</output>
+                <input id="insetRange" type="range" min="0" max="12" value="2" step="1" />
+              </label>
+              <label>去背容許值 <output id="toleranceValue">38</output>
+                <input id="toleranceRange" type="range" min="0" max="100" value="38" step="1" />
+              </label>
+              <label class="toggle-row"><input id="removeBackground" type="checkbox" checked /> 去除格子邊緣相連的純色背景</label>
+              <button class="button white full" id="resetGridLines" type="button" disabled>重設為平均九宮格</button>
+              <div class="spec-block">
+                <strong>輸出規格</strong>
+                <span>370 × 320 px</span>
+                <span>透明 PNG</span>
+                <span>四周 10 px 安全距離</span>
+                <span>只輸出勾選的 8 張</span>
+                <span>主圖 240 × 240 px</span>
+                <span>小圖 96 × 74 px</span>
+              </div>
+              <button class="button red full" id="processGrid" type="button" disabled>切成九張貼圖</button>
+            </div>
+          </div>
+
+          <div class="sticker-results" id="stickerResults" aria-live="polite">
+            <div class="results-empty">上傳九宮格後，這裡會出現九張可以選擇的貼圖。</div>
+          </div>
+          <section class="asset-picks" id="assetPicks" hidden aria-label="主圖與小圖預覽">
+            <article>
+              <div>
+                <p class="kicker">MAIN.PNG</p>
+                <h3>貼圖小舖主圖</h3>
+                <span id="mainChoiceLabel">使用第 01 張</span>
+              </div>
+              <canvas id="mainPreview" width="240" height="240" aria-label="240 × 240 主圖預覽"></canvas>
+              <button class="download-one" id="downloadMain" type="button">下載主圖 PNG ↓</button>
+            </article>
+            <article>
+              <div>
+                <p class="kicker">TAB.PNG</p>
+                <h3>聊天室小圖</h3>
+                <span id="tabChoiceLabel">使用第 01 張</span>
+              </div>
+              <canvas id="tabPreview" width="96" height="74" aria-label="96 × 74 小圖預覽"></canvas>
+              <button class="download-one" id="downloadTab" type="button">下載小圖 PNG ↓</button>
+            </article>
+          </section>
+          <div class="download-bar" id="downloadBar" hidden>
+            <p><strong id="selectedCount">8</strong> / 8 張已選擇，包含主圖與小圖</p>
+            <button class="button blue" id="downloadZip" type="button">下載完整 LINE 貼圖 ZIP</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="script.js"></script>
+  </body>
+</html>

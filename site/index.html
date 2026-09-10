@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="用 GPT 設計一頁式專題網站，在本地確認並加入原創貼圖" />
+    <title>GPT 專題網站上架課</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="../"><span class="brand-shape" aria-hidden="true"></span>← 九宮格貼圖課堂</a>
+      <div class="course-name">研習第 2 頁（共 2 頁）｜GPT 網站設計與上架</div>
+      <div class="class-clock"><span>60</span><small>分鐘課程</small></div>
+    </header>
+
+    <main>
+      <section class="builder-heading">
+        <div>
+          <p class="kicker">GPT WEB DESIGN WORKSHOP</p>
+          <h1>先讓 GPT 設計，<br />再把作品帶回本地。</h1>
+          <p class="heading-note">最後成果是一個 HTML、一頁式、只有兩個主要 Section。貼圖不是網站模板，而是讓專題更容易被記住的視覺素材。</p>
+        </div>
+        <ol class="minute-map" aria-label="第二堂課程時間">
+          <li><b>00–20</b><span>架構與色彩決策</span></li>
+          <li><b>20–30</b><span>GPT 產生網站</span></li>
+          <li><b>30–45</b><span>本地確認＋貼圖</span></li>
+          <li><b>45–60</b><span>下載與上架</span></li>
+        </ol>
+      </section>
+
+      <section class="prompt-section" id="designPrompt">
+        <div class="section-index"><strong>01</strong><span>00–20 MIN</span></div>
+        <div class="prompt-content">
+          <div class="section-heading-line">
+            <div><p class="kicker">DESIGN BRIEF</p><h2>告訴 GPT 你的專題</h2></div>
+            <p>學生輸入什麼就呈現什麼，不讓 GPT 擅自擴寫。八張貼圖是素材庫，只挑與內容真正適合的圖片。</p>
+          </div>
+          <div class="brief-fields project-fields">
+              <label>專題名稱<input id="projectTitle" type="text" value="嘉義砂鍋魚湯" maxlength="40" /></label>
+              <label>專題在解決什麼問題<textarea id="projectProblem" rows="4" maxlength="180">讓其他地區的人看見嘉義獨特味道。</textarea></label>
+              <label>網站要給誰看<input id="projectAudience" type="text" value="外地旅客與喜歡台灣地方美食的人" maxlength="70" /></label>
+              <label>希望有哪些內容<textarea id="projectSections" rows="4" maxlength="180">料理特色、在地故事、食材與熬煮方式、品嚐資訊</textarea></label>
+          </div>
+
+          <section class="decision-block" aria-labelledby="wireframeTitle">
+            <div class="decision-heading"><div><span>DESIGN DECISION A</span><h3 id="wireframeTitle">先選網站架構草圖</h3></div><p>先選資訊順序，GPT 只負責把這個決定做成網站。</p></div>
+            <div class="wireframe-options" id="wireframeOptions">
+              <button class="wireframe-card active" type="button" data-architecture="story">
+                <span class="wireframe sketch-story" aria-hidden="true"><i><b>高 60%｜左 65 / 右 35</b></i><i><b>高 40%｜左 40 / 右 60</b></i></span>
+                <strong>故事推進型</strong><small>第一段問題｜第二段方法與成果</small>
+              </button>
+              <button class="wireframe-card" type="button" data-architecture="data">
+                <span class="wireframe sketch-data" aria-hidden="true"><i><b>高 35%｜左 35 / 右 65</b></i><i><b>高 65%｜左 55 / 右 45</b></i></span>
+                <strong>資料說服型</strong><small>第一段數據｜第二段解法與行動</small>
+              </button>
+              <button class="wireframe-card" type="button" data-architecture="showcase">
+                <span class="wireframe sketch-showcase" aria-hidden="true"><i><b>高 70%｜左 60 / 右 40</b></i><i><b>高 30%｜左 30 / 右 70</b></i></span>
+                <strong>成果展示型</strong><small>第一段主視覺｜第二段成果與團隊</small>
+              </button>
+              <label class="wireframe-card custom-wireframe" for="wireframeFile">
+                <input id="wireframeFile" type="file" accept="image/png,image/jpeg,image/webp" />
+                <span class="wireframe-upload"><img id="wireframePreview" alt="自訂網站架構草圖預覽" /><b id="wireframeEmpty">＋</b></span>
+                <strong>上傳自己的草圖</strong><small>到 ChatGPT 時要再上傳一次</small>
+              </label>
+            </div>
+          </section>
+
+          <section class="decision-block color-block" aria-labelledby="colorTitle">
+            <div class="decision-heading"><div><span>DESIGN DECISION B</span><h3 id="colorTitle">在色相環上建立配色</h3></div><p>直接拖曳色相環，觀察不同色彩關係如何改變網站色票。</p></div>
+            <div class="color-workbench">
+              <div class="color-wheel-panel">
+                <canvas id="colorWheel" width="320" height="320" tabindex="0" aria-label="互動色相環，可拖曳或使用左右方向鍵選擇主色"></canvas>
+                <p><strong>拖曳圓點選主色</strong><span>角度是色相，離中心越遠彩度越高。</span></p>
+              </div>
+              <div class="color-controls">
+                <label class="base-color">主色<input id="baseColor" type="color" value="#1768c9" /><code id="baseColorCode">#1768C9</code></label>
+                <label>色彩關係
+                  <select id="colorHarmony">
+                    <option value="complementary">互補色</option>
+                    <option value="analogous">類似色</option>
+                    <option value="triadic">三角色</option>
+                    <option value="monochromatic">單色</option>
+                  </select>
+                </label>
+                <button class="button black" id="generatePalette" type="button">套用色彩關係</button>
+                <div class="contrast-result" id="contrastResult"><span>文字對比</span><strong>—</strong><small>計算中</small></div>
+              </div>
+            </div>
+            <div class="palette-swatches" id="paletteSwatches" aria-label="網站配色色票"></div>
+          </section>
+
+          <label class="design-direction">其他設計方向（可留空）<input id="designDirection" type="text" placeholder="例如：像科展海報、保留手繪鉛筆質感" /></label>
+          <label class="prompt-output">給 GPT 的網站設計提示詞<textarea id="websitePrompt" rows="28"></textarea></label>
+          <div class="action-row">
+            <button class="button red" id="refreshWebsitePrompt" type="button">更新提示詞</button>
+            <button class="button white" id="copyWebsitePrompt" type="button">複製提示詞</button>
+            <button class="button blue" id="openChatGPT" type="button">複製並開啟 ChatGPT ↗</button>
+          </div>
+          <p class="status-line" id="promptStatus">複製後，請在 ChatGPT 一起上傳 01.png 到 08.png，讓 GPT 看過貼圖再選擇。</p>
+        </div>
+      </section>
+
+      <section class="handoff-band">
+        <strong>02｜20–30 MIN</strong>
+        <span>上傳八張貼圖並貼上提示詞 → GPT 挑選適合圖片 → 複製完整 HTML 回來確認</span>
+        <a href="https://chatgpt.com/" target="_blank" rel="noreferrer">開啟 ChatGPT ↗</a>
+      </section>
+
+      <section class="local-section" id="localCheck">
+        <div class="section-index"><strong>03</strong><span>30–45 MIN</span></div>
+        <div class="local-content">
+          <div class="section-heading-line">
+            <div><p class="kicker">LOCAL CHECK</p><h2>在本地確認，再加入貼圖</h2></div>
+            <p>貼上的程式碼只在隔離的預覽框執行。即使 ChatGPT 內沒有 Preview，全班也能用相同方式檢查。</p>
+          </div>
+          <div class="studio">
+            <aside class="controls-panel">
+              <div class="control-title"><span>1</span><strong>放入 GPT 的 HTML</strong></div>
+              <label class="html-upload" for="htmlFile"><input id="htmlFile" type="file" accept=".html,text/html" /><b>↑</b><span>上傳 index.html</span></label>
+              <label>或貼上完整 HTML<textarea id="htmlCode" rows="15" spellcheck="false"></textarea></label>
+              <button class="button black full" id="applyHtml" type="button">更新本地預覽</button>
+
+              <div class="control-title second"><span>2</span><strong>加入上一堂的貼圖</strong></div>
+              <label class="sticker-upload" for="stickerFiles"><input id="stickerFiles" type="file" accept=".zip,image/png" multiple /><b>＋</b><span>選擇貼圖 ZIP 或八張 PNG</span></label>
+              <div class="sticker-tray" id="stickerTray" aria-label="已匯入貼圖"></div>
+              <p class="upload-status" id="uploadStatus">目前使用示範素材；匯入後只會替換 GPT 挑選並放進網站的貼圖。</p>
+            </aside>
+
+            <section class="preview-panel">
+              <div class="preview-toolbar">
+                <div><span class="status-dot"></span>本地網站預覽</div>
+                <div class="preview-actions">
+                  <div class="viewport-switch" role="group" aria-label="預覽尺寸">
+                    <button type="button" class="active" data-viewport="desktop">桌面</button>
+                    <button type="button" data-viewport="mobile">手機</button>
+                  </div>
+                  <button class="preview-command" id="fullscreenPreview" type="button" title="全螢幕預覽">⛶ <span>全螢幕</span></button>
+                  <button class="preview-command" id="openPreviewTab" type="button" title="在新分頁預覽">↗ <span>新分頁</span></button>
+                </div>
+              </div>
+              <div class="preview-stage" id="previewStage"><iframe id="sitePreview" title="GPT 產生的專題網站本地預覽" sandbox="allow-scripts"></iframe></div>
+              <div class="check-grid" aria-label="本地檢查結果">
+                <div id="htmlCheck"><b>HTML</b><span>等待程式碼</span></div>
+                <div id="stickerCheck"><b>貼圖</b><span>示範素材</span></div>
+                <div id="layoutCheck"><b>版面</b><span>請切換手機確認</span></div>
+              </div>
+              <p class="injection-note" id="injectionNote">GPT 會從八張素材中挑選適合專題內容的貼圖，不需要全部放入網站。</p>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <section class="publish-section" id="publish">
+        <div class="publish-title">
+          <div><p class="kicker">04｜45–60 MIN</p><h2>確認後，上架網站</h2></div>
+          <p>下載包會保留 GPT 的設計，只加入網站實際使用的貼圖檔案與 `index.html`，可以直接交給 Vercel Drop。</p>
+        </div>
+        <div class="publish-steps">
+          <article><b>01</b><h3>本地檢查</h3><p>確認標題、內容、圖片，以及桌面與手機畫面。</p></article>
+          <article><b>02</b><h3>下載 ZIP</h3><p>取得完整 HTML 與 `assets` 貼圖資料夾。</p></article>
+          <article><b>03</b><h3>拖入 Vercel</h3><p>登入 Vercel Drop，拖入 ZIP 並按 Deploy。</p></article>
+          <article><b>04</b><h3>分享成果</h3><p>開啟公開網址，用手機再檢查一次。</p></article>
+        </div>
+        <div class="privacy-note"><strong>公開前檢查</strong><span>不要放真實全名、學校班級、住址、電話、帳號密碼或可辨識個人的照片。</span></div>
+        <div class="publish-actions">
+          <button class="button red" id="downloadSite" type="button">下載 GPT 網站 ZIP</button>
+          <a class="button blue button-link" href="https://vercel.com/drop" target="_blank" rel="noreferrer">開啟 Vercel Drop ↗</a>
+          <a class="button white button-link" href="https://vercel.com/kb/guide/google-stitch-vercel-drop" target="_blank" rel="noreferrer">官方上架教學 ↗</a>
+        </div>
+        <label class="publish-check"><input type="checkbox" /> 我已在本地確認桌面與手機畫面，再進行公開上架。</label>
+      </section>
+    </main>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
