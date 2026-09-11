@@ -131,28 +131,55 @@ export default async function handler(request, response) {
     const updatedRange = appendResult.data?.updates?.updatedRange || "";
     const rowMatch = updatedRange.match(/![A-Z]+(\d+):[A-Z]+\d+$/i);
 
-    if (textFormatRuns.length && rowMatch) {
+    if (rowMatch) {
+      const rowIndex = Number(rowMatch[1]) - 1;
+      const requests = [{
+        repeatCell: {
+          range: {
+            sheetId: config.sheetId,
+            startRowIndex: rowIndex,
+            endRowIndex: rowIndex + 1,
+            startColumnIndex: 0,
+            endColumnIndex: 6
+          },
+          cell: {
+            userEnteredFormat: {
+              backgroundColorStyle: { rgbColor: { red: 1, green: 1, blue: 1 } },
+              textFormat: {
+                foregroundColorStyle: { rgbColor: { red: 0.09, green: 0.09, blue: 0.09 } },
+                bold: false
+              },
+              verticalAlignment: "TOP",
+              wrapStrategy: "WRAP"
+            }
+          },
+          fields: "userEnteredFormat(backgroundColorStyle,textFormat,verticalAlignment,wrapStrategy)"
+        }
+      }];
+
+      if (textFormatRuns.length) {
+        requests.push({
+          updateCells: {
+            start: {
+              sheetId: config.sheetId,
+              rowIndex,
+              columnIndex: 4
+            },
+            rows: [{
+              values: [{
+                userEnteredValue: { stringValue: savedPrompt },
+                textFormatRuns
+              }]
+            }],
+            fields: "userEnteredValue,textFormatRuns"
+          }
+        });
+      }
+
       await client.request({
         url: `https://sheets.googleapis.com/v4/spreadsheets/${encodeURIComponent(config.spreadsheetId)}:batchUpdate`,
         method: "POST",
-        data: {
-          requests: [{
-            updateCells: {
-              start: {
-                sheetId: config.sheetId,
-                rowIndex: Number(rowMatch[1]) - 1,
-                columnIndex: 4
-              },
-              rows: [{
-                values: [{
-                  userEnteredValue: { stringValue: savedPrompt },
-                  textFormatRuns
-                }]
-              }],
-              fields: "userEnteredValue,textFormatRuns"
-            }
-          }]
-        }
+        data: { requests }
       });
     }
 
