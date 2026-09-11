@@ -1,0 +1,9 @@
+{
+  "name": "line-sticker-tutorial",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "diff": "^9.0.0",
+    "google-auth-library": "^10.9.1"
+  }
+}

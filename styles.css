@@ -116,6 +116,7 @@ h1, h2, p { margin-top: 0; }
 h1 { margin-bottom: 24px; font-size: clamp(3rem, 7vw, 6.5rem); line-height: .92; }
 h2 { margin-bottom: 14px; font-size: clamp(2rem, 4vw, 4rem); line-height: .98; }
 .lead { max-width: 670px; margin-bottom: 0; font-size: 1.2rem; line-height: 1.7; }
+.analytics-disclosure { max-width: 670px; margin: 18px 0 0; padding: 10px 12px; border-left: 5px solid var(--blue); background: rgba(255,255,255,.76); font-size: .82rem; line-height: 1.55; }
 
 .route-map { display: grid; border-top: var(--line); }
 .route {

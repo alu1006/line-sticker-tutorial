@@ -13,6 +13,7 @@ const state = {
   mainIndex: 0,
   tabIndex: 0
 };
+const promptBaselines = {};
 
 const defaultActions = ["開心揮手", "大笑", "謝謝", "對不起", "加油", "驚訝", "生氣", "疲累", "比讚"];
 const actionEditor = $("#actionEditor");
@@ -103,6 +104,39 @@ async function copyText(id) {
   toast("提示詞已複製");
 }
 
+function anonymousSessionId() {
+  const key = "lineWorkshopAnonymousSession";
+  try {
+    let sessionId = sessionStorage.getItem(key);
+    if (!sessionId) {
+      sessionId = crypto.randomUUID();
+      sessionStorage.setItem(key, sessionId);
+    }
+    return sessionId;
+  } catch {
+    return `session-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+  }
+}
+
+function logPromptUse(promptId, action) {
+  const prompt = $(`#${promptId}`)?.value;
+  if (!prompt) return;
+
+  fetch("/tutorial/line-sticker/api/log-prompt", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      promptId,
+      action,
+      prompt,
+      baselinePrompt: promptBaselines[promptId] || prompt,
+      sessionId: anonymousSessionId(),
+      pagePath: window.location.pathname
+    }),
+    keepalive: true
+  }).catch(() => {});
+}
+
 $("#refreshCharacterPrompt").addEventListener("click", () => {
   $("#characterPrompt").value = characterPrompt();
   toast("角色提示詞已更新");
@@ -119,9 +153,13 @@ $("#characterFeatures").addEventListener("input", () => $("#characterPrompt").va
 $("#characterStyle").addEventListener("change", () => $("#characterPrompt").value = characterPrompt());
 actionEditor.addEventListener("input", () => $("#gridPrompt").value = gridPrompt());
 
-$$('[data-copy]').forEach((button) => button.addEventListener("click", () => copyText(button.dataset.copy)));
+$$('[data-copy]').forEach((button) => button.addEventListener("click", async () => {
+  await copyText(button.dataset.copy);
+  logPromptUse(button.dataset.copy, "copy");
+}));
 $$('.open-chatgpt').forEach((button) => button.addEventListener("click", async () => {
   await copyText(button.dataset.prompt);
+  logPromptUse(button.dataset.prompt, "copy_open_chatgpt");
   window.open("https://chatgpt.com/", "_blank", "noopener,noreferrer");
   const statusId = button.dataset.status || (button.dataset.prompt === "characterPrompt" ? "characterStatus" : "gridStatus");
   const status = $(`#${statusId}`);
@@ -674,4 +712,7 @@ $("#downloadZip").addEventListener("click", async () => {
 });
 
 updatePrompts();
+for (const promptId of ["characterPrompt", "gridPrompt", "productPrompt"]) {
+  promptBaselines[promptId] = $(`#${promptId}`).value;
+}
 loadExampleGrid().catch(() => toast("範例九宮格載入失敗，請改為上傳圖片"));

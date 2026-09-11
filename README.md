@@ -98,6 +98,30 @@ vercel dev --listen 8790
 - `http://localhost:8790/tutorial/line-sticker`
 - `http://localhost:8790/tutorial/line-sticker/site`
 
+## 匿名提示詞分析
+
+學生按下「複製提示詞」或「複製並開啟 ChatGPT」時，前端會呼叫 `/tutorial/line-sticker/api/log-prompt`，把以下資料附加到 Google Sheet：
+
+1. 伺服器時間
+2. 匿名工作階段 ID
+3. 提示詞類型
+4. 按鈕行為
+5. 完整提示詞，學生新增或替換的文字以紅色粗體標示
+6. 頁面路徑
+
+試算表請建立名為 `prompt_logs` 的工作表，第一列依序填入 `timestamp`、`session_id`、`prompt_id`、`action`、`prompt`、`page_path`。啟用 Google Sheets API 後，建立服務帳戶，並把試算表以編輯者權限分享給服務帳戶的 `client_email`。
+
+本機 `.env.local` 與 Vercel Production 需要設定：
+
+```text
+GOOGLE_SHEET_ID=試算表網址中的 ID
+GOOGLE_SHEET_RANGE=prompt_logs!A:F
+GOOGLE_SHEET_TAB_ID=工作表網址 gid 後面的數字，第一個工作表通常為 0
+GOOGLE_SERVICE_ACCOUNT_JSON=完整的服務帳戶 JSON
+```
+
+憑證不得寫入 Git 或前端程式。若後端尚未設定，學生仍可正常複製提示詞，只會略過分析紀錄。
+
 ## 專案結構
 
 ```text
