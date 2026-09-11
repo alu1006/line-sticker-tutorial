@@ -292,6 +292,27 @@ textarea { resize: vertical; }
 .download-bar[hidden] { display: none; }
 .download-bar p { margin: 0; }
 
+.product-copy-section { margin-top: 58px; padding-top: 42px; border-top: 8px solid var(--ink); }
+.product-copy-section .section-heading h2 { max-width: 760px; }
+.product-copy-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(340px, .9fr); gap: 30px; align-items: start; }
+.product-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.product-fields label, .product-ai-helper label { display: grid; gap: 8px; font-weight: 900; }
+.product-fields input, .product-fields textarea, .product-ai-helper textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 13px 14px;
+  border: var(--line);
+  border-radius: 0;
+  color: var(--ink);
+  background: white;
+  resize: vertical;
+}
+.product-fields input:focus, .product-fields textarea:focus, .product-ai-helper textarea:focus { outline: 4px solid var(--yellow); outline-offset: 1px; }
+.product-ai-helper { display: grid; gap: 16px; padding: 20px; border: var(--line); background: white; box-shadow: var(--shadow); }
+.product-ai-helper .action-row { margin: 0; }
+.product-ai-helper .button { min-height: 44px; }
+.status-line { margin: 0; padding-left: 12px; border-left: 5px solid var(--mint); line-height: 1.5; }
+
 .toast { position: fixed; z-index: 50; right: 22px; bottom: 22px; max-width: 340px; padding: 13px 18px; color: white; border: var(--line); background: var(--ink); opacity: 0; pointer-events: none; transform: translateY(10px); transition: .2s ease; }
 .toast.show { opacity: 1; transform: translateY(0); }
 
@@ -301,7 +322,7 @@ textarea { resize: vertical; }
   .product-spec img { height: 260px; border-right: 0; border-bottom: var(--line); }
   .intro-band { grid-template-columns: 1fr; min-height: auto; }
   .lesson-section { grid-template-columns: 72px 1fr; }
-  .two-columns, .prompt-workspace, .cutter-layout { grid-template-columns: 1fr; }
+  .two-columns, .prompt-workspace, .cutter-layout, .product-copy-grid { grid-template-columns: 1fr; }
   .upload-stage { justify-self: center; }
   .example-board, .grid-example { grid-template-columns: 1fr; }
   .example-board figcaption { border-top: var(--line); border-left: 0; }
@@ -341,6 +362,9 @@ textarea { resize: vertical; }
   .example-board img { max-height: 190px; }
   .grid-example img { max-height: 240px; }
   .download-bar { align-items: stretch; flex-direction: column; }
+  .product-copy-section { margin-top: 42px; padding-top: 30px; }
+  .product-fields { grid-template-columns: 1fr; }
+  .product-ai-helper { padding: 14px; box-shadow: 5px 5px 0 var(--ink); }
   .button { width: 100%; }
 }
 

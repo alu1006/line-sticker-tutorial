@@ -59,9 +59,28 @@ ${actions}
 角色限制：不要重新設計角色，不要改變頭身比例、五官、髮型、服裝、配色與道具。不要合併動作，不要新增其他角色。`;
 }
 
+function productPrompt() {
+  return `請觀察我在這個對話中上傳的原創角色與 LINE 貼圖圖片，協助撰寫中英文商品名稱與介紹。
+
+寫作要求：
+- 中文名稱簡短好記，能看出角色或專題主題。
+- 英文名稱自然易懂，不要只做生硬的逐字翻譯。
+- 中文介紹簡潔說明角色特色、主題與適合使用的日常情境。
+- 英文介紹與中文意思一致，但使用自然英文。
+- 不要模仿、提及或暗示任何知名角色、品牌或作品。
+- 不要加入未提供的人物背景、獎項、店家資訊或其他虛構設定。
+
+只回傳以下四個欄位，不要加前言、編號或 Markdown：
+中文貼圖名稱：
+英文貼圖名稱：
+中文介紹：
+英文介紹：`;
+}
+
 function updatePrompts() {
   $("#characterPrompt").value = characterPrompt();
   $("#gridPrompt").value = gridPrompt();
+  $("#productPrompt").value = productPrompt();
 }
 
 function toast(message) {
@@ -92,6 +111,10 @@ $("#refreshGridPrompt").addEventListener("click", () => {
   $("#gridPrompt").value = gridPrompt();
   toast("九宮格提示詞已更新");
 });
+$("#refreshProductPrompt").addEventListener("click", () => {
+  $("#productPrompt").value = productPrompt();
+  toast("商品文案提示詞已更新");
+});
 $("#characterFeatures").addEventListener("input", () => $("#characterPrompt").value = characterPrompt());
 $("#characterStyle").addEventListener("change", () => $("#characterPrompt").value = characterPrompt());
 actionEditor.addEventListener("input", () => $("#gridPrompt").value = gridPrompt());
@@ -100,8 +123,11 @@ $$('[data-copy]').forEach((button) => button.addEventListener("click", () => cop
 $$('.open-chatgpt').forEach((button) => button.addEventListener("click", async () => {
   await copyText(button.dataset.prompt);
   window.open("https://chatgpt.com/", "_blank", "noopener,noreferrer");
-  const status = button.dataset.prompt === "characterPrompt" ? $("#characterStatus") : $("#gridStatus");
-  status.textContent = "已複製。請在 ChatGPT 上傳參考圖片、貼上提示詞並送出。";
+  const statusId = button.dataset.status || (button.dataset.prompt === "characterPrompt" ? "characterStatus" : "gridStatus");
+  const status = $(`#${statusId}`);
+  status.textContent = button.dataset.prompt === "productPrompt"
+    ? "已複製。請在 ChatGPT 貼上提示詞並送出，再將內容填入四個欄位。"
+    : "已複製。請在 ChatGPT 上傳參考圖片、貼上提示詞並送出。";
 }));
 
 $$('[data-jump]').forEach((button) => button.addEventListener("click", () => {

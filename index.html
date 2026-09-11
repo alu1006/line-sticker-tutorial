@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="一小時完成 AI 九宮格角色與八張 LINE 貼圖的課堂工具" />
     <title>九宮格貼圖課堂</title>
-    <link rel="stylesheet" href="/tutorial/line-sticker/styles.css?v=20260911-3" />
+    <link rel="stylesheet" href="/tutorial/line-sticker/styles.css?v=20260911-4" />
   </head>
   <body>
     <a class="market-banner" href="https://creator.line.me/zh-hant/" target="_blank" rel="noreferrer">
@@ -247,11 +247,50 @@
             <p><strong id="selectedCount">8</strong> / 8 張已選擇，包含主圖與小圖</p>
             <button class="button blue" id="downloadZip" type="button">下載完整 LINE 貼圖 ZIP</button>
           </div>
+
+          <section class="product-copy-section" aria-labelledby="productCopyTitle">
+            <div class="section-heading">
+              <div>
+                <p class="kicker">PRODUCT INFO</p>
+                <h2 id="productCopyTitle">完成貼圖名稱與介紹</h2>
+              </div>
+              <p>請 ChatGPT 參考角色與貼圖圖片產生中英文商品資料，再將內容填入欄位。</p>
+            </div>
+
+            <div class="product-copy-grid">
+              <div class="product-fields">
+                <label>中文貼圖名稱
+                  <input id="productTitleZh" type="text" placeholder="例：小砂鍋的嘉義日常" />
+                </label>
+                <label>英文貼圖名稱
+                  <input id="productTitleEn" type="text" placeholder="例：Little Hot Pot in Chiayi" />
+                </label>
+                <label>中文介紹
+                  <textarea id="productDescriptionZh" rows="5" placeholder="以簡短文字介紹角色、主題與使用情境。"></textarea>
+                </label>
+                <label>英文介紹
+                  <textarea id="productDescriptionEn" rows="5" placeholder="A natural English introduction, not a word-for-word translation."></textarea>
+                </label>
+              </div>
+
+              <div class="product-ai-helper">
+                <label class="prompt-output">商品文案提示詞
+                  <textarea id="productPrompt" rows="13"></textarea>
+                </label>
+                <div class="action-row">
+                  <button class="button red" id="refreshProductPrompt" type="button">更新提示詞</button>
+                  <button class="button white" data-copy="productPrompt" type="button">複製提示詞</button>
+                  <button class="button blue open-chatgpt" data-prompt="productPrompt" data-status="productStatus" type="button">複製並開啟 ChatGPT ↗</button>
+                </div>
+                <p class="status-line" id="productStatus">將提示詞貼到 ChatGPT，完成後把內容填入左側四個欄位。</p>
+              </div>
+            </div>
+          </section>
         </div>
       </section>
     </main>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="/tutorial/line-sticker/script.js?v=20260911-3"></script>
+    <script src="/tutorial/line-sticker/script.js?v=20260911-4"></script>
   </body>
 </html>
