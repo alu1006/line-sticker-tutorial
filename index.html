@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="一小時完成 AI 九宮格角色與八張 LINE 貼圖的課堂工具" />
     <title>九宮格貼圖課堂</title>
-    <link rel="stylesheet" href="/tutorial/line-sticker/styles.css?v=20260911-2" />
+    <link rel="stylesheet" href="/tutorial/line-sticker/styles.css?v=20260911-3" />
   </head>
   <body>
     <a class="market-banner" href="https://creator.line.me/zh-hant/" target="_blank" rel="noreferrer">
@@ -26,6 +26,48 @@
     </header>
 
     <main id="top">
+      <section class="line-spec-intro" aria-labelledby="lineSpecTitle">
+        <div class="line-spec-title">
+          <span>LINE CREATORS MARKET</span>
+          <h2 id="lineSpecTitle">靜態貼圖圖片規格</h2>
+        </div>
+        <div class="line-spec-grid">
+          <article>
+            <h3>貼圖圖片</h3>
+            <img src="/tutorial/line-sticker/assets/line-chat-message.png" alt="LINE 聊天室送出貼圖示意" />
+            <strong>8、16、24、32 或 40 張</strong>
+            <p>每張最大 370 × 320 px，透明 PNG，檔案 1 MB 以下。</p>
+          </article>
+          <article>
+            <h3>主圖</h3>
+            <img src="/tutorial/line-sticker/assets/line-store-grid.png" alt="LINE STORE 貼圖小舖主圖示意" />
+            <strong>1 張</strong>
+            <p>240 × 240 px，作為貼圖小舖封面。</p>
+          </article>
+          <article>
+            <h3>聊天縮圖</h3>
+            <img src="/tutorial/line-sticker/assets/line-chat-sticker-list.png" alt="LINE 聊天室貼圖列表縮圖示意" />
+            <strong>1 張</strong>
+            <p>96 × 74 px，顯示在聊天貼圖列表。</p>
+          </article>
+          <article>
+            <h3>共同要求</h3>
+            <img src="/tutorial/line-sticker/assets/line-safe-space.png" alt="LINE 貼圖圖片安全距離示意" />
+            <strong>PNG / RGB / 72 dpi+</strong>
+            <p>寬高需為偶數，圖像邊緣建議保留約 10 px 安全距離。</p>
+          </article>
+        </div>
+        <div class="product-spec">
+          <img src="/tutorial/line-sticker/assets/line-store-detail.png" alt="LINE 貼圖商品名稱與介紹示意" />
+          <div>
+            <h3>商品頁名稱與介紹</h3>
+            <p>貼圖圖片之外，也要準備名稱與簡短介紹。名稱建議直接說明角色或主題。</p>
+            <strong>範例：嘉義砂鍋魚湯｜在地美食日常貼圖</strong>
+          </div>
+        </div>
+        <a class="line-spec-link" href="https://creator.line.me/zh-hant/guideline/sticker/" target="_blank" rel="noreferrer">查看 LINE Creators Market 官方規格 ↗</a>
+      </section>
+
       <section class="intro-band">
         <div>
           <p class="kicker">AI CHARACTER WORKSHOP</p>
@@ -210,6 +252,6 @@
     </main>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="/tutorial/line-sticker/script.js?v=20260911-2"></script>
+    <script src="/tutorial/line-sticker/script.js?v=20260911-3"></script>
   </body>
 </html>

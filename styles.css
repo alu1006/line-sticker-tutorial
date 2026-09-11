@@ -79,6 +79,24 @@ button { color: inherit; }
 .class-clock span { font-size: 2rem; font-weight: 900; }
 .class-clock small { line-height: 1.1; }
 
+.line-spec-intro { padding: 26px clamp(18px, 3vw, 44px) 22px; border-bottom: var(--line); background: var(--paper); }
+.line-spec-title { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 14px; padding-bottom: 10px; border-bottom: var(--line); }
+.line-spec-title span { font-size: .72rem; font-weight: 900; }
+.line-spec-title h2 { margin: 0; font-size: clamp(1.5rem, 2.5vw, 2.4rem); }
+.line-spec-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: var(--line); border-left: var(--line); }
+.line-spec-grid article { display: grid; grid-template-rows: auto 200px auto 1fr; min-width: 0; border-right: var(--line); border-bottom: var(--line); background: white; }
+.line-spec-grid h3 { margin: 0; padding: 10px 12px; border-bottom: var(--line); background: var(--yellow); font-size: 1rem; }
+.line-spec-grid img { display: block; width: 100%; height: 200px; border-bottom: var(--line); object-fit: contain; background: #eef3fb; }
+.line-spec-grid strong { padding: 10px 12px 0; font-size: 1rem; }
+.line-spec-grid p { margin: 0; padding: 6px 12px 12px; font-size: .78rem; line-height: 1.45; }
+.product-spec { display: grid; grid-template-columns: minmax(320px, .9fr) minmax(280px, 1.1fr); margin-top: 14px; border: var(--line); background: white; }
+.product-spec img { display: block; width: 100%; height: 310px; border-right: var(--line); object-fit: contain; }
+.product-spec div { padding: 18px; }
+.product-spec h3 { margin: 0 0 10px; }
+.product-spec p { max-width: 620px; line-height: 1.55; }
+.product-spec strong { display: inline-block; margin-top: 18px; padding: 9px 11px; color: white; background: var(--blue); }
+.line-spec-link { display: inline-block; margin-top: 12px; color: var(--ink); font-size: .78rem; font-weight: 900; }
+
 .intro-band {
   display: grid;
   grid-template-columns: minmax(0, 1.3fr) minmax(360px, .7fr);
@@ -278,6 +296,9 @@ textarea { resize: vertical; }
 .toast.show { opacity: 1; transform: translateY(0); }
 
 @media (max-width: 900px) {
+  .line-spec-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .product-spec { grid-template-columns: 1fr; }
+  .product-spec img { height: 260px; border-right: 0; border-bottom: var(--line); }
   .intro-band { grid-template-columns: 1fr; min-height: auto; }
   .lesson-section { grid-template-columns: 72px 1fr; }
   .two-columns, .prompt-workspace, .cutter-layout { grid-template-columns: 1fr; }
@@ -295,6 +316,12 @@ textarea { resize: vertical; }
   .market-banner strong { font-size: 1.2rem; }
   .market-action { font-size: .78rem; }
   .topbar { min-height: 62px; }
+  .line-spec-intro { padding: 20px 14px; }
+  .line-spec-title { align-items: start; flex-direction: column; gap: 6px; }
+  .line-spec-grid { grid-template-columns: 1fr; }
+  .line-spec-grid article { grid-template-rows: auto 180px auto 1fr; }
+  .line-spec-grid img { height: 180px; }
+  .product-spec img { height: 210px; }
   .brand { padding: 10px 14px; font-size: 1rem; }
   .brand-shape { width: 23px; }
   .class-clock { min-width: 112px; padding: 8px 12px; }
